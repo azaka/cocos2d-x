@@ -59,8 +59,8 @@ If ($env:build_type -eq "android_cpp_tests") {
     Pop-Location
     
     # 
-    $srcproject = $env:APPVEYOR_BUILD_FOLDER\cocos_new_test\SS6PlayerForCocos2d-x\Cocos2d-x_v3\samples\basic\*
-    $destdir = $env:APPVEYOR_BUILD_FOLDER\cocos_new_test\
+    $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test\SS6PlayerForCocos2d-x\Cocos2d-x_v3\samples\basic\*"
+    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test\"
     
     # overwrites Classes, Resources folders
     Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
