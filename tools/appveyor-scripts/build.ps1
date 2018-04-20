@@ -65,6 +65,11 @@ If ($env:build_type -eq "android_cpp_tests") {
     # overwrites Classes, Resources folders
     Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
     
+    # replace HelloWorldScene.cpp with this repo's version
+    $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\HelloWorldScene.cpp"
+    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test\Classes"
+    Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
+    
     # replace generated cocos_new_test.vcxproj
     $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test.vcxproj"
     $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test\proj.win32\cocos_new_test.vcxproj"
