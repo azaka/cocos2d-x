@@ -65,6 +65,11 @@ If ($env:build_type -eq "android_cpp_tests") {
     # overwrites Classes, Resources folders
     Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
     
+    # replace generated cocos_new_test.vcxproj
+    $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test.vcxproj"
+    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test\proj.win32\cocos_new_test.vcxproj"
+    Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
+    
     & msbuild $env:APPVEYOR_BUILD_FOLDER\cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
     if ($lastexitcode -ne 0) {throw}
 
