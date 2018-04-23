@@ -28,7 +28,7 @@ function Update-SubModule
 {
     Push-Location $env:APPVEYOR_BUILD_FOLDER
     & git submodule init
-    & git submodule update --recursive --depth=1
+    & git submodule update --recursive --depth=100
     Pop-Location
 }
 
