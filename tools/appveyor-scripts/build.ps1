@@ -57,6 +57,9 @@ If ($env:build_type -eq "android_cpp_tests") {
     Push-Location $env:APPVEYOR_BUILD_FOLDER\cocos_new_test\
     # & git clone --depth 1 https://github.com/SpriteStudio/SS6PlayerForCocos2d-x
     & git clone https://github.com/SpriteStudio/SS5PlayerForCocos2d-x
+    Push-Location SS5PlayerForCocos2d-x
+    & git checkout -b ssbpv3 b6cf223f1af2d61a71628a03c8116f67cd60f105
+    Pop-Location
     Pop-Location
     
     # 
