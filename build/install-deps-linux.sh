@@ -51,14 +51,7 @@ if [ -n "$MISSING" ]; then
     TXTCOLOR_DEFAULT="\033[0;m"
     TXTCOLOR_GREEN="\033[0;32m"
     echo "Missing packages: $MISSING.\nYou may be asked for your password for package installation."
-    CUR_APT_VERSION="$(apt --version | grep -o '[0-9].[0-9]')"
-    REQ_APT_VERSION="1.1"
-    if [ 1 -ge "$(echo "${CUR_APT_VERSION} >= ${REQ_APT_VERSION}" | bc)" ]
-    then
-        sudo apt-get install --allow-change-held-packages $MISSING -y > /dev/null
-    else
-        sudo apt-get install --force-yes --yes $MISSING > /dev/null
-    fi 
+    sudo apt-get install --yes $MISSING > /dev/null
 fi
 
 
