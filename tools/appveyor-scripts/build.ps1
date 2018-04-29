@@ -51,42 +51,17 @@ If ($env:build_type -eq "android_cpp_tests") {
 
 } elseif ($env:build_type -eq "windows32_cocos_new_test") {
     Write-Host "Create new project windows32_cocos_new_test"
+    
+    # work with cocos 3.8
+    & git clone https://github.com/cocos2d/cocos2d-x
+    Push-Location cocos2d-x
+    
+    & git checkout -b 3.8 12ff8cd2dd1bfdcad78abc5eff494cb8cf0053d8
+    & $python download-deps.py -r=yes
+    & git submodule update --init
+
     & $python -u tools\cocos2d-console\bin\cocos.py --agreement n new -l cpp -p my.pack.qqqq cocos_new_test
     if ($lastexitcode -ne 0) {throw}
-    
-    Push-Location $env:APPVEYOR_BUILD_FOLDER\cocos_new_test\
-    # & git clone --depth 1 https://github.com/SpriteStudio/SS6PlayerForCocos2d-x
-    & git clone https://github.com/SpriteStudio/SS5PlayerForCocos2d-x
-    Push-Location SS5PlayerForCocos2d-x
-    & git checkout -b ssbpv3 b6cf223f1af2d61a71628a03c8116f67cd60f105
-    Pop-Location
-    Pop-Location
-    
-    # 
-    # $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test\SS5PlayerForCocos2d-x\Cocos2d-x_v3\samples\basic\*"
-    $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test\SS5PlayerForCocos2d-x\samples\cocos2d-x\basic\*"
-    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test\"
-    
-    # overwrites Classes, Resources folders
-    Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
-    
-    # replace HelloWorldScene.cpp with this repo's version
-    $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\HelloWorldScene.cpp"
-    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test\Classes"
-    Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
-    
-    # replace generated cocos_new_test.vcxproj
-    $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test.vcxproj"
-    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test\proj.win32\cocos_new_test.vcxproj"
-    Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
-    
-    & msbuild $env:APPVEYOR_BUILD_FOLDER\cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
-    if ($lastexitcode -ne 0) {throw}
-
-    & 7z a release_win32.7z $env:APPVEYOR_BUILD_FOLDER\cocos_new_test\proj.win32\Release.win32\
-    if ($lastexitcode -ne 0) {throw}
-
-    Push-AppveyorArtifact release_win32.7z
 }
 Else {
     & msbuild $env:APPVEYOR_BUILD_FOLDER\build\cocos2d-win32.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
