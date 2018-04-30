@@ -149,7 +149,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
-<ClCompile Include="$([System.IO.Directory]::GetFiles('C:\projects\cocos2d-x\cocos_new_test\Classes\SSPlayer\', '*.cpp', SearchOption.AllDirectories))" />
+<ClCompile Include="$([System.IO.Directory]::GetFiles('C:\projects\cocos2d-x\cocos2d-x\cocos_new_test\Classes\SSPlayer\', '*.cpp', SearchOption.AllDirectories))" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
