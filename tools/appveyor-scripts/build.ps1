@@ -60,7 +60,7 @@ If ($env:build_type -eq "android_cpp_tests") {
     & $python download-deps.py -r=yes
     & git submodule update --init
 
-    & $python -u tools\cocos2d-console\bin\cocos.py --agreement n new -l cpp -p my.pack.qqqq cocos_new_test
+    & $python -u tools\cocos2d-console\bin\cocos.py new MyGame -p com.your_company.mygame -l cpp -d NEW_PROJECTS_DIR
     if ($lastexitcode -ne 0) {throw}
 }
 Else {
