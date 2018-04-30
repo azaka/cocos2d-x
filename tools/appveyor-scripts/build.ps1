@@ -64,6 +64,13 @@ If ($env:build_type -eq "android_cpp_tests") {
     & $python -u tools\cocos2d-console\bin\cocos.py new -l cpp -p my.pack.qqqq cocos_new_test
     if ($lastexitcode -ne 0) {throw}
     
+    Push-Location cocos_new_test
+    & git clone https://github.com/SpriteStudio/SS5PlayerForCocos2d-x
+    Push-Location SS5PlayerForCocos2d-x
+    & git checkout -b ssbpv3 b6cf223f1af2d61a71628a03c8116f67cd60f105
+    Pop-Location
+    Pop-Location
+    
     # cocos 3.8
     & msbuild $env:APPVEYOR_BUILD_FOLDER\cocos2d-x\cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
     if ($lastexitcode -ne 0) {throw}
