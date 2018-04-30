@@ -85,6 +85,11 @@ If ($env:build_type -eq "android_cpp_tests") {
     # cocos 3.8
     & msbuild cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
     if ($lastexitcode -ne 0) {throw}
+    
+    & 7z a release_win32.7z cocos_new_test\proj.win32\Release.win32\
+    if ($lastexitcode -ne 0) {throw}
+
+    Push-AppveyorArtifact release_win32.7z
 }
 Else {
     & msbuild $env:APPVEYOR_BUILD_FOLDER\build\cocos2d-win32.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
