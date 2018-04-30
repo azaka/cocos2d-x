@@ -60,7 +60,12 @@ If ($env:build_type -eq "android_cpp_tests") {
     & $python download-deps.py -r=yes
     & git submodule update --init
 
-    & $python -u tools\cocos2d-console\bin\cocos.py new MyGame -p com.your_company.mygame -l cpp -d NEW_PROJECTS_DIR
+    # cocos 3.8
+    & $python -u tools\cocos2d-console\bin\cocos.py new -l cpp -p my.pack.qqqq cocos_new_test
+    if ($lastexitcode -ne 0) {throw}
+    
+    # cocos 3.8
+    & msbuild $env:APPVEYOR_BUILD_FOLDER\cocos2d-x\cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
     if ($lastexitcode -ne 0) {throw}
 }
 Else {
