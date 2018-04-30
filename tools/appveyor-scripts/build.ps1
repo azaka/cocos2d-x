@@ -72,7 +72,7 @@ If ($env:build_type -eq "android_cpp_tests") {
     Pop-Location
     
     # cocos 3.8
-    & msbuild $env:APPVEYOR_BUILD_FOLDER\cocos2d-x\cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
+    & msbuild cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
     if ($lastexitcode -ne 0) {throw}
 }
 Else {
