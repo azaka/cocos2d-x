@@ -79,7 +79,7 @@ If ($env:build_type -eq "android_cpp_tests") {
     
     # replace generated cocos_new_test.vcxproj
     $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test.vcxproj"
-    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\ocos2d-x\cocos_new_test\proj.win32\cocos_new_test.vcxproj"
+    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\cocos_new_test\proj.win32\cocos_new_test.vcxproj"
     Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
     
     # cocos 3.8
