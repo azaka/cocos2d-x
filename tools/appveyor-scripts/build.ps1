@@ -59,6 +59,9 @@ If ($env:build_type -eq "android_cpp_tests") {
     & git checkout -b 3.8 12ff8cd2dd1bfdcad78abc5eff494cb8cf0053d8
     & $python download-deps.py -r=yes
     & git submodule update --init
+    
+    & tar
+    if ($lastexitcode -ne 0) {throw}
 
     # cocos 3.8
     & $python -u tools\cocos2d-console\bin\cocos.py new -l cpp -p my.pack.qqqq cocos_new_test
