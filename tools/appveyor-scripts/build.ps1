@@ -65,7 +65,7 @@ If ($env:build_type -eq "android_cpp_tests") {
     if ($lastexitcode -ne 0) {throw}
     
     # SS5PlayerForCocos2d-x-1.2.0_SS5.6
-    & wget https://github.com/SpriteStudio/SS5PlayerForCocos2d-x/archive/1.2.0_SS5.6.tar.gz
+    & wget https://github.com/SpriteStudio/SS5PlayerForCocos2d-x/archive/1.2.0_SS5.6.tar.gz -O 1.2.0_SS5.6.tar.gz
     & tar -xf 1.2.0_SS5.6.tar.gz
     
     $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\SS5PlayerForCocos2d-x-1.2.0_SS5.6\samples\cocos2d-x\basic\*"
