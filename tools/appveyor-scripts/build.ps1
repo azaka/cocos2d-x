@@ -59,21 +59,25 @@ If ($env:build_type -eq "android_cpp_tests") {
     & git checkout -b 3.8 12ff8cd2dd1bfdcad78abc5eff494cb8cf0053d8
     & $python download-deps.py -r=yes
     & git submodule update --init
-    
-    & tar
-    if ($lastexitcode -ne 0) {throw}
 
     # cocos 3.8
     & $python -u tools\cocos2d-console\bin\cocos.py new -l cpp -p my.pack.qqqq cocos_new_test
     if ($lastexitcode -ne 0) {throw}
     
-    Push-Location cocos_new_test
-    & git clone https://github.com/SpriteStudio/SS5PlayerForCocos2d-x
-    Push-Location SS5PlayerForCocos2d-x
-    & git checkout -b ssbpv3 b6cf223f1af2d61a71628a03c8116f67cd60f105
-    Pop-Location
-    Pop-Location
+    # SS5PlayerForCocos2d-x-1.2.0_SS5.6
+    & wget https://github.com/SpriteStudio/SS5PlayerForCocos2d-x/archive/1.2.0_SS5.6.tar.gz
+    & tar -xf 1.2.0_SS5.6.tar.gz
     
+    $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\cocos_new_test\SS5PlayerForCocos2d-x-1.2.0_SS5.6\samples\cocos2d-x\basic\*"
+    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\cocos_new_test\"
+    
+    # overwrites Classes, Resources folders
+    Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
+    
+    # replace generated cocos_new_test.vcxproj
+    $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test.vcxproj"
+    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\cocos_new_test\proj.win32\cocos_new_test.vcxproj"
+    Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
     
     # cocos 3.8
     & msbuild cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
