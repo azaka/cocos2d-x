@@ -84,7 +84,7 @@ If ($env:build_type -eq "android_cpp_tests") {
     if ($lastexitcode -ne 0) {throw}
     
     #& 7z a release_win32.7z cocos_new_test\proj.win32\Release.win32\
-    & 7z a release_win32.7z cocos_new_test\proj.win32\
+    & 7z a release_win32.7z cocos_new_test
     if ($lastexitcode -ne 0) {throw}
 
     Push-AppveyorArtifact release_win32.7z
