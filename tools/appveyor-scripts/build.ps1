@@ -88,8 +88,8 @@ If ($env:build_type -eq "android_cpp_tests") {
     & msbuild cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
     if ($lastexitcode -ne 0) {throw}
     
-    #& 7z a release_win32.7z cocos_new_test\proj.win32\Release.win32\
-    & 7z a release_win32.7z cocos_new_test
+    & 7z a release_win32.7z cocos_new_test\proj.win32\Release.win32\
+    #& 7z a release_win32.7z cocos_new_test
     if ($lastexitcode -ne 0) {throw}
 
     Push-AppveyorArtifact release_win32.7z
