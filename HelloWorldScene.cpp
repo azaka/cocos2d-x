@@ -73,48 +73,48 @@ bool HelloWorld::init()
 
 	/**********************************************************************************
 
-	SS�A�j���\���̃T���v���R�[�h
-	Visual Studio Express 2013 for Windows Desktop�œ�����m�F���Ă��܂��B
-	ssbp��png������΍Đ����鎖���ł��܂����AResources�t�H���_��sspj���܂܂�Ă��܂��B
+	SSアニメ表示のサンプルコード
+	Visual Studio Express 2013 for Windows Desktopで動作を確認しています。
+	ssbpとpngがあれば再生する事ができますが、Resourcesフォルダにsspjも含まれています。
 
 	**********************************************************************************/
 	//--------------------------------------------------------------------------------
-	//SS5.5���瓋�ڂ��ꂽ�G�t�F�N�g�@�\�̍œK�����s��SS5Manager�N���X���ǉ�����܂����B
-	//�v���C���[�����L����G�t�F�N�g�o�b�t�@���쐬���܂��B
-	//�o�b�t�@�͏풓����܂��̂ŃQ�[���N��������1�x�s���Ă��������B
+	//SS5.5から搭載されたエフェクト機能の最適化を行いSS5Managerクラスが追加されました。
+	//プレイヤーが共有するエフェクトバッファを作成します。
+	//バッファは常駐されますのでゲーム起動時等に1度行ってください。
 	auto ss5man = ss::SS5Manager::getInstance();
-	ss5man->createEffectBuffer(1024);			//�G�t�F�N�g�p�o�b�t�@�̍쐬
+	ss5man->createEffectBuffer(1024);			//エフェクト用バッファの作成
 	//--------------------------------------------------------------------------------
 
-	//���\�[�X�}�l�[�W���̍쐬
+	//リソースマネージャの作成
 	auto resman = ss::ResourceManager::getInstance();
-	//�v���C���[�̍쐬
+	//プレイヤーの作成
 	ssplayer = ss::Player::create();
 
-	//�A�j���f�[�^�����\�[�X�ɒǉ�
-	//���ꂼ��̃v���b�g�t�H�[���ɍ��킹���p�X�֕ύX���Ă��������B
+	//アニメデータをリソースに追加
+	//それぞれのプラットフォームに合わせたパスへ変更してください。
 	resman->addData("character_template_comipo\\character_template1.ssbp");
-	//�v���C���[�Ƀ��\�[�X�����蓖��
-	ssplayer->setData("character_template1");        // ssbp�t�@�C�����i�g���q�s�v�j
-	//�Đ����郂�[�V������ݒ�
-	ssplayer->play("character_template_3head/stance");				 // �A�j���[�V���������w��(ssae��/�A�j���[�V������)
+	//プレイヤーにリソースを割り当て
+	ssplayer->setData("character_template1");        // ssbpファイル名（拡張子不要）
+	//再生するモーションを設定
+	// ssplayer->play("character_template_3head/stance");				 // アニメーション名を指定(ssae名/アニメーション名)
 
-	//�A�j���̈ʒu��ݒ�
+	//アニメの位置を設定
 	ssplayer->setPosition(visibleSize.width / 2, visibleSize.height / 2);
-	//�X�P�[���̕ύX
+	//スケールの変更
 	ssplayer->setScale(0.5f, 0.5f);
 
-	//���[�U�[�f�[�^�R�[���o�b�N��ݒ�
+	//ユーザーデータコールバックを設定
 	ssplayer->setUserDataCallback(CC_CALLBACK_2(HelloWorld::userDataCallback, this));
 
-	//�A�j���[�V�����I���R�[���o�b�N��ݒ�
+	//アニメーション終了コールバックを設定
 	ssplayer->setPlayEndCallback(CC_CALLBACK_1(HelloWorld::playEndCallback, this));
 
-	//�v���C���[���Q�[���V�[���ɒǉ�
+	//プレイヤーをゲームシーンに追加
 	this->addChild(ssplayer, 10);
 
 
-	//updete�̍쐬
+	//updeteの作成
 	this->scheduleUpdate();
 
 
@@ -138,49 +138,49 @@ void HelloWorld::menuCloseCallback(Ref* pSender)
 }
 
 
-//���C�����[�v
+//メインループ
 void HelloWorld::update(float delta)
 {
-	// �����ɏ������L�q
+	// ここに処理を記述
 	
-	//�p�[�c��������W���擾���܂��B
-	//�Q�[���̓��e�ɉ����ĕK�v�ȏ����擾�ł���悤�Ƀv���C���[���������Ă��������B
+	//パーツ名から座標を取得します。
+	//ゲームの内容に応じて必要な情報を取得できるようにプレイヤーを改造してください。
 	ss::ResluteState result;
-	//�Đ����Ă��郂�[�V�����Ɋ܂܂��p�[�c���ucollision�v�̃X�e�[�^�X���擾���܂��B
+	//再生しているモーションに含まれるパーツ名「collision」のステータスを取得します。
 	ssplayer->getPartState(result, "collision");
 		
-	//�擾�������W��\��
+	//取得した座標を表示
 	auto str = String::createWithFormat("x:%f, y:%f", result.x, result.y);
 	label->setString(str->getCString());
 
 }
 
-//���[�U�[�f�[�^�R�[���o�b�N
+//ユーザーデータコールバック
 void HelloWorld::userDataCallback(ss::Player* player, const ss::UserData* data)
 {
-	//�Đ������t���[���Ƀ��[�U�[�f�[�^���ݒ肳��Ă���ꍇ�Ăяo����܂��B
-	//�v���C���[�𔻒肷��ꍇ�A�Q�[�����ŊǗ����Ă���ss::Player�̃A�h���X�Ɣ�r���Ĕ��肵�Ă��������B
+	//再生したフレームにユーザーデータが設定されている場合呼び出されます。
+	//プレイヤーを判定する場合、ゲーム側で管理しているss::Playerのアドレスと比較して判定してください。
 /*
-	//�R�[���o�b�N���Ńp�[�c�̃X�e�[�^�X���擾�������ꍇ�́A���̎��_�ł̓A�j�����X�V����Ă��Ȃ����߁A
-	//getPartState�@�Ɂ@data->frameNo�@�Ńt���[�������w�肵�Ď擾���Ă��������B
+	//コールバック内でパーツのステータスを取得したい場合は、この時点ではアニメが更新されていないため、
+	//getPartState　に　data->frameNo　でフレーム数を指定して取得してください。
 	ss::ResluteState result;
-	//�Đ����Ă��郂�[�V�����Ɋ܂܂��p�[�c���ucollision�v�̃X�e�[�^�X���擾���܂��B
+	//再生しているモーションに含まれるパーツ名「collision」のステータスを取得します。
 	ssplayer->getPartState(result, "collision", data->frameNo);
 */	
 
 }
 
 
-//�A�j���[�V�����I���R�[���o�b�N
+//アニメーション終了コールバック
 void HelloWorld::playEndCallback(ss::Player* player)
 {
-	//�Đ������A�j���[�V�������I�������i�K�ŌĂяo����܂��B
-	//�v���C���[�𔻒肷��ꍇ�A�Q�[�����ŊǗ����Ă���ss::Player�̃A�h���X�Ɣ�r���Ĕ��肵�Ă��������B
+	//再生したアニメーションが終了した段階で呼び出されます。
+	//プレイヤーを判定する場合、ゲーム側で管理しているss::Playerのアドレスと比較して判定してください。
 	//player->getPlayAnimeName();
-	//���g�p���鎖�ōĐ����Ă���A�j���[�V���������擾���鎖���ł��܂��B
+	//を使用する事で再生しているアニメーション名を取得する事もできます。
 	
-	//���[�v�񐔕��Đ�������ɌĂяo�����_�ɒ��ӂ��Ă��������B
-	//�������[�v�ōĐ����Ă���ꍇ�̓R�[���o�b�N���������܂���B
+	//ループ回数分再生した後に呼び出される点に注意してください。
+	//無限ループで再生している場合はコールバックが発生しません。
 
 }
 
