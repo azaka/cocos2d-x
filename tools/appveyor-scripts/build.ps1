@@ -93,6 +93,17 @@ If ($env:build_type -eq "android_cpp_tests") {
     if ($lastexitcode -ne 0) {throw}
 
     Push-AppveyorArtifact release_win32.7z
+    
+    # upload a copy to external repo
+    & git clone --depth 1 git@github.com:azaka/upgraded-barnacle.git
+    Push-Location upgraded-barnacle
+    Copy-item ..\release_win32.7z release_win32.7z
+    # prev ver already exists
+    & git commit -am"upload"
+    & git push
+    Pop-Location
+    
+    if ($lastexitcode -ne 0) {throw}
 }
 Else {
     & msbuild $env:APPVEYOR_BUILD_FOLDER\build\cocos2d-win32.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
