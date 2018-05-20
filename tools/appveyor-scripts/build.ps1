@@ -94,15 +94,6 @@ If ($env:build_type -eq "android_cpp_tests") {
 
     Push-AppveyorArtifact release_win32.7z
     
-    # upload a copy to external repo
-    & git clone --depth 1 git@github.com:azaka/upgraded-barnacle.git
-    Push-Location upgraded-barnacle
-    Copy-item ..\release_win32.7z release_win32.7z
-    # prev ver already exists
-    & git commit -am"upload"
-    & git push
-    Pop-Location
-    
     if ($lastexitcode -ne 0) {throw}
 }
 Else {
