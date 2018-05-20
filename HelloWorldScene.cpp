@@ -99,8 +99,8 @@ bool HelloWorld::init()
 	// https://github.com/SpriteStudio/SS5PlayerForCocos2d-x/blob/b6cf223f1af2d61a71628a03c8116f67cd60f105/samples/cocos2d-x/basic/Classes/SSPlayer/SS5Player.cpp#L1043
 	// this is per resource (the ssbp)
 	
-	ss::ResourceSet* rs = ssplayer->getData("character_template1");   
-	rs->animeCache->dump();
+	auto res = resman->getData("character_template1");   
+	res->animeCache->dump();
 	
 	// ss::AnimeRef* animeRef = rs->animeCache->getReference("Ok");
 	
