@@ -99,13 +99,14 @@ bool HelloWorld::init()
 	// https://github.com/SpriteStudio/SS5PlayerForCocos2d-x/blob/b6cf223f1af2d61a71628a03c8116f67cd60f105/samples/cocos2d-x/basic/Classes/SSPlayer/SS5Player.cpp#L1043
 	// this is per resource (the ssbp)
 	
-	auto res = resman->getData("character_template1");   
-	res->animeCache->dump();
+	// auto res = resman->getData("character_template1");   
+	// res->animeCache->dump();
 	
-	// ss::AnimeRef* animeRef = rs->animeCache->getReference("Ok");
+	auto animeRef = rs->animeCache->getReference("Ok");
 	
 	//再生するモーションを設定
 	// ssplayer->play("character_template_3head/stance");				 // アニメーション名を指定(ssae名/アニメーション名)
+	ssplayer->play("Ok");
 
 	//アニメの位置を設定
 	ssplayer->setPosition(visibleSize.width / 2, visibleSize.height / 2);
