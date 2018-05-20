@@ -94,8 +94,16 @@ bool HelloWorld::init()
 	//アニメデータをリソースに追加
 	//それぞれのプラットフォームに合わせたパスへ変更してください。
 	resman->addData("character_template_comipo\\character_template1.ssbp");
-	//プレイヤーにリソースを割り当て
-	// ssplayer->setData("character_template1");        // ssbpファイル名（拡張子不要）
+	//プレイーにリソースを割り当て
+	ssplayer->setData("character_template1");        // ssbpファイル名（拡張子不要）
+	// https://github.com/SpriteStudio/SS5PlayerForCocos2d-x/blob/b6cf223f1af2d61a71628a03c8116f67cd60f105/samples/cocos2d-x/basic/Classes/SSPlayer/SS5Player.cpp#L1043
+	// this is per resource (the ssbp)
+	
+	ss::ResourceSet* rs = ssplayer->getData("character_template1");   
+	rs->animeCache->dump();
+	
+	// ss::AnimeRef* animeRef = rs->animeCache->getReference("Ok");
+	
 	//再生するモーションを設定
 	// ssplayer->play("character_template_3head/stance");				 // アニメーション名を指定(ssae名/アニメーション名)
 
