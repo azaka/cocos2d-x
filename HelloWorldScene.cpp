@@ -100,13 +100,13 @@ bool HelloWorld::init()
 	// this is per resource (the ssbp)
 	
 	// auto res = resman->getData("character_template1");   
-	// res->animeCache->dump();
+	resman->getData("character_template1")->animeCache->dump();
 	
 	// auto animeRef = rs->animeCache->getReference("Ok");
 	
 	//再生するモーションを設定
 	// ssplayer->play("character_template_3head/stance");				 // アニメーション名を指定(ssae名/アニメーション名)
-	ssplayer->play("Ok");
+	// ssplayer->play("Ok");
 
 	//アニメの位置を設定
 	ssplayer->setPosition(visibleSize.width / 2, visibleSize.height / 2);
