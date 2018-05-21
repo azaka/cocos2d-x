@@ -85,10 +85,10 @@ If ($env:build_type -eq "android_cpp_tests") {
     Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
     
     # cocos 3.8
-    & msbuild cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Release" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
+    & msbuild cocos_new_test\proj.win32\cocos_new_test.sln /t:Build /p:Platform="Win32" /p:Configuration="Debug" /m /consoleloggerparameters:"PerformanceSummary;NoSummary"
     if ($lastexitcode -ne 0) {throw}
     
-    & 7z a release_win32.7z cocos_new_test\proj.win32\Release.win32\
+    & 7z a release_win32.7z cocos_new_test\proj.win32\Debug.win32\
     #& 7z a release_win32.7z cocos_new_test
     if ($lastexitcode -ne 0) {throw}
 
