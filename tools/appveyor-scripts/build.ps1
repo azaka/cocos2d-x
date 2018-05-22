@@ -70,11 +70,15 @@ If ($env:build_type -eq "android_cpp_tests") {
     
     # https://aka.ms/vs/15/release/vs_community.exe
     & wget https://aka.ms/vs/15/release/vs_community.exe -O vs_community.exe
+    Get-ChildItem -Path $pwd
     & vs_community.exe --layout c:\vs2017layout --add Microsoft.VisualStudio.Product.BuildTools -lang en-US
+    
+    if ($lastexitcode -ne 0) {throw}
+    
     & 7z a vs2017layout.7z c:\vs2017layout\
     Push-AppveyorArtifact vs2017layout.7z
     
-    if ($lastexitcode -ne 0) {throw}
+    
     
     
     $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\SS5PlayerForCocos2d-x-1.2.0_SS5.6\samples\cocos2d-x\basic\*"
