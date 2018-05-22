@@ -71,7 +71,8 @@ If ($env:build_type -eq "android_cpp_tests") {
     # https://aka.ms/vs/15/release/vs_community.exe
     & wget https://aka.ms/vs/15/release/vs_community.exe -O vs_community.exe
     Get-ChildItem -Path $pwd
-    & vs_community.exe --layout c:\vs2017layout --add Microsoft.VisualStudio.Product.BuildTools -lang en-US
+    $installer = $pwd + "\vs_community.exe"
+    & $installer --layout c:\vs2017layout --add Microsoft.VisualStudio.Product.BuildTools -lang en-US
     
     if ($lastexitcode -ne 0) {throw}
     
