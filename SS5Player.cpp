@@ -1560,6 +1560,8 @@ void Player::play(const std::string& animeName, int loop, int startFrameNo)
 	if (animeRef == nullptr)
 	{
 		auto msg = cocos2d::StringUtils::format("Not found animation > anime=%s", animeName.c_str());
+		std::cout() << msg;
+		return;
 		CCASSERT(animeRef != nullptr, msg.c_str());
 	}
 	_currentAnimename = animeName;
