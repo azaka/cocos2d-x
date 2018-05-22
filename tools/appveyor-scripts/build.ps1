@@ -79,6 +79,11 @@ If ($env:build_type -eq "android_cpp_tests") {
     $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\cocos_new_test\Classes"
     Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
     
+    # patch lib SS5Player.cpp
+    $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\SS5Player.cpp"
+    $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\cocos_new_test\Classes\SSPlayer"
+    Copy-item -Force -Recurse -Verbose $srcproject -Destination $destdir
+    
     # replace generated cocos_new_test.vcxproj
     $srcproject = $env:APPVEYOR_BUILD_FOLDER + "\cocos_new_test.vcxproj"
     $destdir = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\cocos_new_test\proj.win32\cocos_new_test.vcxproj"
