@@ -69,9 +69,9 @@ If ($env:build_type -eq "android_cpp_tests") {
     & tar -xf 1.2.0_SS5.6.tar.gz
     
     # https://aka.ms/vs/15/release/vs_community.exe
-    & wget https://aka.ms/vs/15/release/vs_community.exe -O vs_community.exe
+    $installer = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\vs_community.exe"
+    & wget https://aka.ms/vs/15/release/vs_community.exe -O $installer
     Get-ChildItem -Path $pwd
-    $installer = $pwd + "\vs_community.exe"
     & $installer --layout c:\vs2017layout --add Microsoft.VisualStudio.Product.BuildTools -lang en-US
     
     if ($lastexitcode -ne 0) {throw}
