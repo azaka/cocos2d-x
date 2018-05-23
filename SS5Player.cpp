@@ -6,6 +6,7 @@
 #include "SS5PlayerData.h"
 #include <string>
 #include <iostream>
+#include "base/ccUtils.h"
 
 namespace ss
 {
