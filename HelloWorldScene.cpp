@@ -106,7 +106,18 @@ bool HelloWorld::init()
 	
 	//再生するモーションを設定
 	// ssplayer->play("character_template_3head/stance");				 // アニメーション名を指定(ssae名/アニメーション名)
-	ssplayer->play("character_template1/Ready");
+	/* available animations
+	anime key: body_anim/Attack1
+	anime key: body_anim/Attack2
+	anime key: body_anim/Damage
+	anime key: body_anim/Idle
+	anime key: body_anim/Jump
+	anime key: body_anim/Ok
+	anime key: body_anim/Ready
+	anime key: body_anim/Start
+	*/
+	// ssplayer->play("character_template1/Ready");
+	ssplayer->play("body_anim/Ready");
 
 	//アニメの位置を設定
 	ssplayer->setPosition(visibleSize.width / 2, visibleSize.height / 2);
