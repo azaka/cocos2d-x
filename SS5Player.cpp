@@ -1563,7 +1563,7 @@ void Player::play(const std::string& animeName, int loop, int startFrameNo)
 	// CCASSERT(_currentRs != nullptr, "Not select data");
 	// std::cout << "play" << animeName << "\n";
 	auto msg = cocos2d::StringUtils::format("play > anime=%s", animeName.c_str());
-	// log(msg.c_str());
+	CCLOG("%s\n", msg.c_str());
 	return;
 
 	AnimeRef* animeRef = _currentRs->animeCache->getReference(animeName);
