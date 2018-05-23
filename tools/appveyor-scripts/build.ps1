@@ -71,13 +71,13 @@ If ($env:build_type -eq "android_cpp_tests") {
     # https://aka.ms/vs/15/release/vs_community.exe
     $installer = $env:APPVEYOR_BUILD_FOLDER + "\cocos2d-x\vs_community.exe"
     & wget https://aka.ms/vs/15/release/vs_community.exe -O $installer
-    Get-ChildItem -Path $pwd
-    & $installer --layout c:\vs2017layout --add Microsoft.VisualStudio.Product.BuildTools -lang en-US | Out-Null
+    #Get-ChildItem -Path $pwd
+    #& $installer --layout c:\vs2017layout --add Microsoft.VisualStudio.Product.BuildTools -lang en-US | Out-Null
     
-    if ($lastexitcode -ne 0) {throw}
+   if ($lastexitcode -ne 0) {throw}
     
-    & 7z a vs2017layout.7z c:\vs2017layout\
-    Push-AppveyorArtifact vs2017layout.7z
+    #& 7z a vs2017layout.7z c:\vs2017layout\
+    #Push-AppveyorArtifact vs2017layout.7z
     
     
     
