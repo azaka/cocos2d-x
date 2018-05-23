@@ -1575,8 +1575,6 @@ void Player::play(const std::string& animeName, int loop, int startFrameNo)
 	}
 	msg = cocos2d::StringUtils::format(" anime=%s found", animeName.c_str());
 	CCLOG("%s", msg.c_str());
-
-	return;
 	
 	_currentAnimename = animeName;
 
