@@ -1563,18 +1563,23 @@ void Player::play(const std::string& animeName, int loop, int startFrameNo)
 	// CCASSERT(_currentRs != nullptr, "Not select data");
 	// std::cout << "play" << animeName << "\n";
 	auto msg = cocos2d::StringUtils::format("play > anime=%s", animeName.c_str());
-	CCLOG("%s\n", msg.c_str());
-	return;
+	CCLOG("%s", msg.c_str());
 
 	AnimeRef* animeRef = _currentRs->animeCache->getReference(animeName);
 	if (animeRef == nullptr)
 	{
 		auto msg = cocos2d::StringUtils::format("Not found animation > anime=%s", animeName.c_str());
-		std::cout << msg;
+		CCLOG("%s", msg.c_str());
 		return;
 		CCASSERT(animeRef != nullptr, msg.c_str());
 	}
+	msg = cocos2d::StringUtils::format(" anime=%s found", animeName.c_str());
+	CCLOG("%s", msg.c_str());
+
+	return;
+	
 	_currentAnimename = animeName;
+
 
 	play(animeRef, loop, startFrameNo);
 }
