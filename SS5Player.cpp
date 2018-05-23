@@ -1554,7 +1554,9 @@ void Player::play(const std::string& ssaeName, const std::string& motionName, in
 
 void Player::play(const std::string& animeName, int loop, int startFrameNo)
 {
-	CCASSERT(_currentRs != nullptr, "Not select data");
+	// CCASSERT(_currentRs != nullptr, "Not select data");
+	std::cout << "play" << animeName << "\n";
+	return;
 
 	AnimeRef* animeRef = _currentRs->animeCache->getReference(animeName);
 	if (animeRef == nullptr)
