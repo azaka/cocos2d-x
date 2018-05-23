@@ -5,7 +5,7 @@
 #include "SS5Player.h"
 #include "SS5PlayerData.h"
 #include <string>
-
+#include <iostream>
 
 namespace ss
 {
